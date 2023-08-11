@@ -5,8 +5,14 @@ import AuthForm from "../components/AuthForm";
 import NavLink from "../components/NavLink";
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup } = useContext(AuthContext);
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  React.useEffect(() => {
+    const clearMessage = navigation.addListener("focus", () => {
+      clearErrorMessage();
+    });
 
+    return clearMessage;
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <AuthForm
