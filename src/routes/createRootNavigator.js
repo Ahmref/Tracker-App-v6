@@ -50,6 +50,7 @@ const MainFlowBottom = () => (
     <mainFlowBottomTabNavigator.Screen
       name="Account"
       component={AccountScreen}
+      //  options={{ headerShown: false }}
     />
   </mainFlowBottomTabNavigator.Navigator>
 );
@@ -64,7 +65,7 @@ const RootNavigatorFlow = () => {
         token = await SecureStore.getItemAsync("token");
       } catch (err) {
         // Restoring token failed
-        // console.log("Unable to fetch token.");
+        //console.log("Unable to fetch token.");
       }
       // After restoring token, we may need to validate it
       //  dispatch({ type: "RESTORE_TOKEN", token: token });
@@ -72,6 +73,7 @@ const RootNavigatorFlow = () => {
     fetchToken();
   }, [dispatch]);
   //console.log(state.token);
+
   return (
     <RootNavigator.Navigator>
       {state.token == null ? (
