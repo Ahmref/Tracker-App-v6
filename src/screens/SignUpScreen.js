@@ -16,7 +16,7 @@ const SignupScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <AuthForm
-        headerText="Sign Up for tracker"
+        headerText=""
         errorMessage={state.errorMessage}
         submitButtonText="Sign Up"
         onSubmit={signup}

@@ -15,7 +15,7 @@ const SigninScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <AuthForm
-        headerText="Sign In for tracker"
+        headerText=""
         errorMessage={state.errorMessage}
         submitButtonText="Sign In"
         onSubmit={signin}

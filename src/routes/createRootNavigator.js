@@ -1,7 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Context as AuthContext } from "../context/AuthContext";
 import AccountScreen from "../screens/AccountScreen";
 import SignInScreen from "../screens/SignInScreen";
@@ -10,13 +9,13 @@ import TrackCreateScreen from "../screens/TrackCreateScreen";
 import TrackDetailScreen from "../screens/TrackDetailScreen";
 import TrackListScreen from "../screens/TrackListScreen";
 import { Icon } from "@rneui/themed";
-
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 const loginFlowStack = createNativeStackNavigator();
 const LoginFlow = () => (
   <loginFlowStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: "#f4511e",
+        backgroundColor: "black",
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -41,51 +40,18 @@ const LoginFlow = () => (
     />
   </loginFlowStack.Navigator>
 );
-const AccountStack = createNativeStackNavigator();
-function AccountStackNavigator() {
-  return (
-    <AccountStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#f4511e",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <AccountStack.Screen
-        name="Accountscreen"
-        component={AccountScreen}
-        options={{
-          title: "Account",
-        }}
-      />
-    </AccountStack.Navigator>
-  );
-}
 
 const trackListStack = createNativeStackNavigator();
 
 function TrackListStackNavigator() {
   return (
-    <trackListStack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#f4511e",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
+    <trackListStack.Navigator>
       <trackListStack.Screen
         name="TrackList"
         component={TrackListScreen}
         options={{
           title: "Tracks",
+          headerShown: false,
         }}
       />
       <trackListStack.Screen
@@ -93,24 +59,37 @@ function TrackListStackNavigator() {
         component={TrackDetailScreen}
         options={{
           title: "Track Detail",
+          headerShown: false,
         }}
       />
     </trackListStack.Navigator>
   );
 }
-const mainFlowBottomTabNavigator = createMaterialBottomTabNavigator();
+const mainFlowBottomTabNavigator = createBottomTabNavigator();
 const MainFlowBottom = () => (
   <mainFlowBottomTabNavigator.Navigator
-    activeColor="#f0edf6"
-    inactiveColor="#3e2465"
-    barStyle={{ backgroundColor: "#f4511e" }}
+    screenOptions={{
+      tabBarActiveTintColor: "white",
+      tabBarInactiveTintColor: "gray",
+      tabBarStyle: { backgroundColor: "black" },
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "#fff",
+    }}
   >
     <mainFlowBottomTabNavigator.Screen
       name="trackListStackNavigator"
       component={TrackListStackNavigator}
       options={{
         title: "Tracks",
-        tabBarIcon: () => <Icon name="map-pin" type="font-awesome-5" />,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons
+            name="map-marker-distance"
+            color={color}
+            size={30}
+          />
+        ),
       }}
     />
     <mainFlowBottomTabNavigator.Screen
@@ -118,15 +97,19 @@ const MainFlowBottom = () => (
       component={TrackCreateScreen}
       options={{
         title: "Add Tracks",
-        tabBarIcon: () => <Icon name="plus" type="font-awesome" />,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="plus" color={color} size={30} />
+        ),
       }}
     />
     <mainFlowBottomTabNavigator.Screen
-      name="AccountStackNavigator"
-      component={AccountStackNavigator}
+      name="Account"
+      component={AccountScreen}
       options={{
         title: "Account",
-        tabBarIcon: () => <Icon name="user" type="font-awesome" />,
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={color} size={size} />
+        ),
       }}
     />
   </mainFlowBottomTabNavigator.Navigator>
